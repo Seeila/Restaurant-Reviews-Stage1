@@ -25,7 +25,7 @@ fetchSelectInfos = () => {
       let selectorName = element.id.slice(0, -7)
       selectorName = selectorName.charAt(0).toUpperCase() + selectorName.slice(1);
       functionName = 'fetch' + selectorName;
-
+      //calls the function with the functionName variable in the dbHelper CLass
       DBHelper[functionName]((error, infos) => {
         if (error) { // Got an error
           console.error(error);
@@ -104,6 +104,7 @@ updateRestaurants = () => {
     } else {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
+         addFocus();
     }
   })
 }
@@ -163,7 +164,8 @@ createRestaurantHTML = (restaurant) => {
   article.append(address);
 
   const more = document.createElement('a');
-  more.innerHTML = 'View Details';
+  more.innerHTML = 'View Details'
+  more.setAttribute("aria-label", "View Details about " + restaurant.name);
   more.href = DBHelper.urlForRestaurant(restaurant);
   article.append(more)
 
@@ -184,6 +186,13 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 
+}
+
+function addFocus() {
+   const allHeadings = document.querySelectorAll("article");
+   console.log(allHeadings);
+
+   allHeadings.forEach(heading => heading.setAttribute("tabIndex", "0"));
 }
 /* addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {

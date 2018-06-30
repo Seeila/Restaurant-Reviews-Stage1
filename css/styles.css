@@ -60,11 +60,6 @@ section {
    display: block;
 }
 
-:focus {
-	outline: none;
-	border: 2px solid orange;
-	box-shadow: 0 2px 1px rgba(0,0,0,0.3);
-}
 
 #maincontent {
    min-height: 100%;
@@ -320,6 +315,21 @@ nav h1 a {
 
 #reviews-container article .post-comments {
    text-align: justify;
+}
+
+
+/* ====================== Accessibility ====================== */
+
+select:focus {
+	outline: none;
+	border: 2px solid orange !important;
+	box-shadow: 0 2px 1px rgba(0,0,0,0.3);
+}
+
+.skip-link {
+	position: absolute;
+	top:80px;
+	z-index:-1;
 }
 
 /* ====================== Mediaqueries ====================== */
