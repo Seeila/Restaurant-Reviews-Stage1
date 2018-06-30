@@ -87,7 +87,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
+  image.className = 'restaurant-img';
+   image.alt = "";
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   const cuisine = document.getElementById('restaurant-cuisine');
@@ -136,18 +137,16 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     container.appendChild(noReviews);
     return;
   }
-  const ul = document.getElementById('reviews-list');
   reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
+    container.appendChild(createReviewHTML(review));
   });
-  container.appendChild(ul);
 }
 
 /**
  * Create review HTML and add it to the webpage.
  */
 createReviewHTML = (review) => {
-  const li = document.createElement('li');
+  const article = document.createElement('article');
   const header = document.createElement('header');
 
   const name = document.createElement('p');
@@ -160,19 +159,19 @@ createReviewHTML = (review) => {
   date.classList.add("post-date");
   header.appendChild(date);
 
-  li.appendChild(header);
+  article.appendChild(header);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
   rating.classList.add("post-rating");
-  li.appendChild(rating);
+  article.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
    comments.classList.add("post-comments");
-  li.appendChild(comments);
+  article.appendChild(comments);
 
-  return li;
+  return article;
 }
 
 /**

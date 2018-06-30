@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added
   fetchNeighborhoods();
   fetchCuisines();
+
+  const cSelect = document.getElementById('cuisines-select');
+  const nSelect = document.getElementById('neighborhoods-select');
+   cSelect.addEventListener('change', updateRestaurants);
+   nSelect.addEventListener('change', updateRestaurants);
 });
 
 /**
@@ -104,9 +109,12 @@ initMap = () => {
 /**
  * Update page and map for current restaurants.
  */
+
+
+
 updateRestaurants = () => {
-  const cSelect = document.getElementById('cuisines-select');
-  const nSelect = document.getElementById('neighborhoods-select');
+   const cSelect = document.getElementById('cuisines-select');
+   const nSelect = document.getElementById('neighborhoods-select');
 
   const cIndex = cSelect.selectedIndex;
   const nIndex = nSelect.selectedIndex;
@@ -123,6 +131,8 @@ updateRestaurants = () => {
     }
   })
 }
+
+
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
@@ -156,31 +166,32 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
+  const article = document.createElement('article');
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  li.append(image);
+  image.alt = "";
+  article.append(image);
 
   const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
-  li.append(name);
+  article.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
+  article.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
-  li.append(address);
+  article.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  article.append(more)
 
-  return li
+  return article
 }
 
 /**

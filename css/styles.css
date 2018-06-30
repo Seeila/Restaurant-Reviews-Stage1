@@ -154,7 +154,7 @@ nav h1 a {
    justify-content: center;
 }
 
-#restaurants-list li {
+#restaurants-list article {
 	width: 100%;
    max-width: 350px;
    margin: 15px;
@@ -173,7 +173,7 @@ nav h1 a {
    display: block;
 }
 
-#restaurants-list li h3 {
+#restaurants-list article h3 {
    margin: 20px 0 10px;
 	padding: 0 20px;
    color: #f18200;
@@ -185,7 +185,7 @@ nav h1 a {
    margin: 10px 0;
 }
 
-#restaurants-list li a {
+#restaurants-list article a {
    margin: 15px auto 0;
    padding: 20px 20px;
    background-color: orange;
@@ -196,7 +196,7 @@ nav h1 a {
    display: block;
 	transition: 0.5s;
 }
-#restaurants-list li a:hover {
+#restaurants-list article a:hover {
    background-color: #3397DB;
 }
 
@@ -253,7 +253,7 @@ nav h1 a {
 }
 
 
-#reviews-list li {
+#reviews-container article {
    margin: 10px 0 20px;
    position: relative;
 
@@ -267,7 +267,7 @@ nav h1 a {
    display: block;
 }
 
-#reviews-list li header {
+#reviews-container article header {
 	padding: 5px 0;
 	background: #333;
 	display: flex;
@@ -275,20 +275,20 @@ nav h1 a {
 	align-items: center;
 }
 
-#reviews-list li header .post-name {
+#reviews-container article header .post-name {
 	font-size: 1.5rem;
 		color: #fff;
 		margin:5px 0;
 }
-#reviews-list li header .post-date {
+#reviews-container article header .post-date {
 		color: orange;
 }
 
-#reviews-list li p {
+#reviews-container article p {
    padding: 0 20px;
 }
 
-#reviews-list li p.post-rating {
+#reviews-container article p.post-rating {
 	padding: 8px 15px;
     margin: 20px 13px 0;
 	background: orange;
@@ -298,7 +298,7 @@ nav h1 a {
     color: white;
 	 display: inline-block;
 }
-#reviews-list li p.post-comments {
+#reviews-container article p.post-comments {
 	text-align: justify;
 }
 
@@ -343,24 +343,24 @@ nav h1 a {
    .filter-options h2 {
       font-size: 2.5rem;
    }
-   #restaurants-list {
+   #reviews-container{
       padding: 30px;
       box-sizing: border-box;
       justify-content: space-between;
    }
-   #restaurants-list::after {
+   #reviews-container:after {
       content: '';
       flex: auto;
    }
 }
 
 @media screen and (min-width: 1450px) {
-   #restaurants-list {
+   #reviews-container {
       padding: 30px;
       box-sizing: border-box;
       justify-content: center;
    }
-   #restaurants-list::after {
+   #reviews-container::after {
       display: none;
    }
 }
