@@ -9,69 +9,45 @@ var markers = []
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added
-  fetchNeighborhoods();
-  fetchCuisines();
-
+  fetchSelectInfos();
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
    cSelect.addEventListener('change', updateRestaurants);
    nSelect.addEventListener('change', updateRestaurants);
 });
 
-/**
- * Fetch all neighborhoods and set their HTML.
- */
-fetchNeighborhoods = () => {
-  DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-    if (error) { // Got an error
-      console.error(error);
-    } else {
-      self.neighborhoods = neighborhoods;
-      fillNeighborhoodsHTML();
-    }
-  });
+
+fetchSelectInfos = () => {
+   const selectElements = document.querySelectorAll('select');
+
+   selectElements.forEach(element => {
+      //uses the select id to dynamically call the matching fetch function in the dbHelper class
+      let selectorName = element.id.slice(0, -7)
+      selectorName = selectorName.charAt(0).toUpperCase() + selectorName.slice(1);
+      functionName = 'fetch' + selectorName;
+
+      DBHelper[functionName]((error, infos) => {
+        if (error) { // Got an error
+          console.error(error);
+        } else {
+          self.infos = infos;
+          fillSelectHTML(self.infos, element.id);
+        }
+      });
+
+   });
 }
 
-/**
- * Set neighborhoods HTML.
- */
-fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
-  const select = document.getElementById('neighborhoods-select');
-  neighborhoods.forEach(neighborhood => {
-    const option = document.createElement('option');
-    option.innerHTML = neighborhood;
-    option.value = neighborhood;
-    select.append(option);
-  });
+fillSelectHTML = (infos, selectId) => {
+   let select = document.getElementById(selectId);
+   infos.forEach(info => {
+     const option = document.createElement('option');
+     option.innerHTML = info;
+     option.value = info;
+     select.append(option);
+   });
 }
 
-/**
- * Fetch all cuisines and set their HTML.
- */
-fetchCuisines = () => {
-  DBHelper.fetchCuisines((error, cuisines) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.cuisines = cuisines;
-      fillCuisinesHTML();
-    }
-  });
-}
-
-/**
- * Set cuisines HTML.
- */
-fillCuisinesHTML = (cuisines = self.cuisines) => {
-  const select = document.getElementById('cuisines-select');
-
-  cuisines.forEach(cuisine => {
-    const option = document.createElement('option');
-    option.innerHTML = cuisine;
-    option.value = cuisine;
-    select.append(option);
-  });
-}
 
 /**
  * Initialize leaflet map, called from HTML.
