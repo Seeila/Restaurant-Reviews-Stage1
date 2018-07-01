@@ -190,8 +190,6 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 
 function addFocus() {
    const allHeadings = document.querySelectorAll("article");
-   console.log(allHeadings);
-
    allHeadings.forEach(heading => heading.setAttribute("tabIndex", "0"));
 }
 /* addMarkersToMap = (restaurants = self.restaurants) => {
