@@ -1,25 +1,24 @@
-let staticCacheName = 'mws-restaurant-v1';
+let staticCacheName = 'mws-restaurant-v2';
 
 if ('serviceWorker' in navigator) {
-   window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js').then(function(registration) {
-         // Registration was successful
-         console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-         // registration failed :(
-         console.log('ServiceWorker registration failed: ', err);
-      });
-   });
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
 }
-
 
 
 self.addEventListener('install', (event) => {
    event.waitUntil(
       caches.open(staticCacheName).then(cache => {
-         cache.addAll([
+         return cache.addAll([
             '/',
-            '/restaurant',
+            'index.html',
             '/js/main.js',
             '/css/styles.css',
             '/js/restaurant_info.js',
@@ -34,7 +33,9 @@ self.addEventListener('install', (event) => {
             '/img/8.jpg',
             '/img/9.jpg',
             '/img/10.jpg'
-         ]).then(() => console.log('everything is cached'))
+         ]).then(() => console.log('everything is cached')).catch(err => {
+            console.log('fail', err)
+         })
       })
    );
 });
