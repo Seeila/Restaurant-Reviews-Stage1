@@ -88,7 +88,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
    const image = document.getElementById('restaurant-img');
    image.className = 'restaurant-img';
-   image.alt = "";
+     image.alt = restaurant.name;
    image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
    const cuisine = document.getElementById('restaurant-cuisine');
@@ -181,9 +181,9 @@ createReviewHTML = (review) => {
  */
 fillBreadcrumb = (restaurant = self.restaurant) => {
    const breadcrumb = document.getElementById('breadcrumb');
-   const li = document.createElement('li');
-   li.innerHTML = restaurant.name;
-   breadcrumb.appendChild(li);
+   const a = document.createElement('a');
+   a.innerHTML = restaurant.name;
+   breadcrumb.appendChild(a);
 }
 
 /**
@@ -204,7 +204,6 @@ getParameterByName = (name, url) => {
 
 function addFocus() {
    const allFocusElements = document.querySelectorAll("article");
-   console.log(allFocusElements);
 
    allFocusElements.forEach(element => element.setAttribute("tabIndex", "0"));
 }

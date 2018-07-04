@@ -94,34 +94,26 @@ nav h1 a {
 
 #breadcrumb {
    margin: 0;
-   padding: 10px 15px;
-   list-style: none;
+   height:45px;
+   padding: 10px 30px;
    background-color: #eee;
    font-size: 17px;
-}
-
-/* Display list items side by side */
-#breadcrumb li {
-   display: inline;
+   justify-content: flex-start;
 }
 
 /* Add a slash symbol (/) before/behind each list item */
-#breadcrumb li+li:before {
+#breadcrumb a + a:before {
    content: "/\00a0";
    padding: 8px;
-   color: black;
-}
-
-/* Add a color to all links inside the list */
-#breadcrumb li a {
    color: #0275d8;
    text-decoration: none;
 }
 
+
+
 /* Add a color on mouse-over */
-#breadcrumb li a:hover {
+#breadcrumb a:hover {
    color: #01447e;
-   text-decoration: underline;
 }
 
 /* ====================== Map ====================== */
